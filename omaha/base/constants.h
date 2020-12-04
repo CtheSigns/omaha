@@ -83,9 +83,16 @@ const TCHAR* const kCompanyInternalLanGroupName = COMPANY_DOMAIN_BASE;
 // MAIN_EXE_BASE_NAME = "GoogleUpdate"
 #define MAIN_EXE_BASE_NAME  _T(MAIN_EXE_BASE_NAME_ANSI)
 
+#define STRING2(x) #x
+#define STRING(x) STRING2(x)
+
+#pragma message(STRING(MAIN_EXE_BASE_NAME))
+
+
 // Base name of the main DLL.
 // MAIN_DLL_BASE_NAME = "goopdate"
 #define MAIN_DLL_BASE_NAME _T(MAIN_DLL_BASE_NAME_ANSI)
+#pragma message(STRING(MAIN_DLL_BASE_NAME_ANSI))
 
 // Application name.
 // Use the localized IDS_PRODUCT_DISPLAY_NAME or the formatted
@@ -94,6 +101,9 @@ const TCHAR* const kCompanyInternalLanGroupName = COMPANY_DOMAIN_BASE;
 // TODO(omaha): Maybe rename all of these kOmahaAppName.
 const TCHAR* const kAppName = _T(OMAHA_APP_NAME_ANSI);
 
+#pragma message(STRING(OMAHA_APP_NAME_ANSI))
+
+//#error wtf
 #define COMPANY_NAME_IDENTIFIER SHORT_COMPANY_NAME
 #define PRODUCT_NAME_IDENTIFIER PRODUCT_NAME
 #define APP_NAME_IDENTIFIER SHORT_COMPANY_NAME PRODUCT_NAME
@@ -153,13 +163,13 @@ const TCHAR* const kTemporaryFilenamePrefix = _T("gup");
 // Omaha's app ID
 //
 // TODO(omaha): Rename all of these "Omaha".
-#define GOOPDATE_APP_ID _T("{430FD4D0-B729-4F61-AA34-91526481799D}")
+#define GOOPDATE_APP_ID _T("{1E972C4E-6353-4467-BF19-94DA1127DEAC}")
 const TCHAR* const kGoogleUpdateAppId = GOOPDATE_APP_ID;
-const GUID kGoopdateGuid = {0x430FD4D0, 0xB729, 0x4F61,
-                            {0xAA, 0x34, 0x91, 0x52, 0x64, 0x81, 0x79, 0x9D}};
+const GUID kGoopdateGuid = {0x1E972C4E, 0x6353, 0x4467,
+                            {0xBF, 0x19, 0x94, 0xDA, 0x11, 0x27, 0xDE, 0xAC}};
 
 // Chrome AppIDs
-#define CHROME_APP_ID _T("{8A69D345-D564-463C-AFF1-A69D9E530F96}")
+#define CHROME_APP_ID _T("{3F5AC3B7-C641-43FD-B7AC-819AF1E0DE38}")
 const TCHAR* const kChromeAppId = CHROME_APP_ID;
 
 #if defined(HAS_DEVICE_MANAGEMENT) && defined(HAS_LEGACY_DM_CLIENT)

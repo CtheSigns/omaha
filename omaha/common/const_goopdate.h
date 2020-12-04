@@ -222,10 +222,10 @@ const TCHAR* const kRegValueDelayOmahaUninstall   = _T("DelayUninstall");
 const TCHAR* const kRegValueOmahaEulaAccepted     = _T("eulaaccepted");
 // TODO(omaha3): Consider renaming these if there is not a upgrade problem.
 // If we can't consider moving all "gupdate" values to the customization file.
-const TCHAR* const kRegValueServiceName           = _T("omaha_service_name");
-const TCHAR* const kRegValueMediumServiceName     = _T("omaham_service_name");
-const TCHAR* const kRegValueTaskNameC             = _T("omaha_task_name_c");
-const TCHAR* const kRegValueTaskNameUA            = _T("omaha_task_name_ua");
+const TCHAR* const kRegValueServiceName           = _T("cts_update_service");
+const TCHAR* const kRegValueMediumServiceName     = _T("cts_update_service_m");
+const TCHAR* const kRegValueTaskNameC             = _T("cts_update_task");
+const TCHAR* const kRegValueTaskNameUA            = _T("cts_update_task_ua");
 const TCHAR* const kRegValueLastStartedAU         = _T("LastStartedAU");
 const TCHAR* const kRegValueLastChecked           = _T("LastChecked");
 const TCHAR* const kRegValueLastCoreRun           = _T("LastCoreRun");

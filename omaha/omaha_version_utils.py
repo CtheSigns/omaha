@@ -19,65 +19,11 @@
 
 _ONECLICK_PLUGIN_NAME = 'npGoogleOneClick'
 _UPDATE_PLUGIN_NAME = 'npGoogleUpdate'
-_CRASH_HANDLER_NAME = 'GoogleCrashHandler'
+_CRASH_HANDLER_NAME = 'CtheSignsCrashHandler'
 
 # List of languages that are fully supported in the current build.
 _OMAHA_LANGUAGES = [
-    'am',
-    'ar',
-    'bg',
-    'bn',
-    'ca',
-    'cs',
-    'da',
-    'de',
-    'el',
-    'en',
-    'en-GB',
-    'es',
-    'es-419',
-    'et',
-    'fa',
-    'fi',
-    'fil',
-    'fr',
-    'gu',
-    'hi',
-    'hr',
-    'hu',
-    'id',
-    'is',
-    'it',
-    'iw',
-    'ja',
-    'kn',
-    'ko',
-    'lt',
-    'lv',
-    'ml',
-    'mr',
-    'ms',
-    'nl',
-    'no',
-    'pl',
-    'pt-BR',
-    'pt-PT',
-    'ro',
-    'ru',
-    'sk',
-    'sl',
-    'sr',
-    'sv',
-    'sw',
-    'ta',
-    'te',
-    'th',
-    'tr',
-    'uk',
-    'ur',
-    'vi',
-    'zh-CN',
-    'zh-TW',
+    'en'
     ]
 
 # The shell and goopdate.dll contain additional languages.
@@ -118,13 +64,13 @@ def _GetMetainstallerPayloadFilenames(prefix,
   # TODO(omaha): Move the other filename defines in main.scons into this file
   # and allow all filenames to be customized.
   payload_files = [
-      'GoogleUpdate.exe',
+      'CtheSignsUpdate.exe',
       '%s.exe' % _CRASH_HANDLER_NAME,
       '%sgoopdate.dll' % (prefix),
-      'GoogleUpdateHelper.msi',
-      'GoogleUpdateBroker.exe',
-      'GoogleUpdateOnDemand.exe',
-      'GoogleUpdateComRegisterShell64.exe',
+      'CtheSignsUpdateHelper.msi',
+      'CtheSignsUpdateBroker.exe',
+      'CtheSignsUpdateOnDemand.exe',
+      'CtheSignsUpdateComRegisterShell64.exe',
       '%spsmachine.dll' % (prefix),
       '%spsmachine_64.dll' % (prefix),
       '%spsuser.dll' % (prefix),
@@ -132,9 +78,9 @@ def _GetMetainstallerPayloadFilenames(prefix,
       ]
 
   if _IsSupportedOmaha2Version(omaha_version):
-    payload_files.remove('GoogleUpdateBroker.exe')
-    payload_files.remove('GoogleUpdateOnDemand.exe')
-    payload_files.remove('GoogleUpdateComRegisterShell64.exe')
+    payload_files.remove('CtheSignsUpdateBroker.exe')
+    payload_files.remove('CtheSignsUpdateOnDemand.exe')
+    payload_files.remove('CtheSignsUpdateComRegisterShell64.exe')
     payload_files.remove('psmachine.dll')
     payload_files.remove('psmachine_64.dll')
     payload_files.remove('psuser.dll')
@@ -156,7 +102,7 @@ def _GetMetainstallerPayloadFilenames(prefix,
       omaha_version[1] >= 3 and
       (omaha_version[2] >= 32)):
     # added with 1.3.32.1 and later
-    payload_files.append('GoogleUpdateCore.exe')
+    payload_files.append('CtheSignsUpdateCore.exe')
 
   for language in languages:
     payload_files += ['%sgoopdateres_%s.dll' % (prefix, language)]
