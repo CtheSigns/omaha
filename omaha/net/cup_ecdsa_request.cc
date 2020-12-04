@@ -42,11 +42,11 @@ namespace omaha {
 namespace internal {
 
 const uint8 CupEcdsaRequestImpl::kCupProductionPublicKey[] =
-#include "omaha/net/cup_ecdsa_pubkey.10.h"
+#include "omaha/net/cup_ecdsa_pubkey.1.h"
 ;   // NOLINT
 
 const uint8 CupEcdsaRequestImpl::kCupTestPublicKey[] =
-#include "omaha/net/cup_ecdsa_pubkey.3.h"
+#include "omaha/net/cup_ecdsa_pubkey.1.h"
 ;   // NOLINT
 
 CupEcdsaRequestImpl::CupEcdsaRequestImpl(HttpRequestInterface* http_request)

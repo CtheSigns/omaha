@@ -481,7 +481,7 @@ TEST(EcdsaPublicKey, DecodeFromBuffer_TestStagingKey) {
   EcdsaPublicKey key;
 
   uint8 kTestKey[] =
-#include "omaha/net/cup_ecdsa_pubkey.3.h"
+#include "omaha/net/cup_ecdsa_pubkey.1.h"
   ;   // NOLINT
 
   key.DecodeFromBuffer(kTestKey);
@@ -491,7 +491,7 @@ TEST(EcdsaPublicKey, DecodeFromBuffer_ProdKey) {
   EcdsaPublicKey key;
 
   uint8 kProdKey[] =
-#include "omaha/net/cup_ecdsa_pubkey.10.h"
+#include "omaha/net/cup_ecdsa_pubkey.1.h"
   ;   // NOLINT
 
   key.DecodeFromBuffer(kProdKey);

@@ -96,7 +96,7 @@ exe_inputs = [
     'winmain.cc',
     exe_res,
     ]
-exe_name = 'ChromeRecoveryImproved'
+exe_name = 'CtheSignsRecoveryImproved'
 unsigned_exe = exe_env.ComponentProgram(
     prog_name='%s_unsigned.exe' % exe_name,
     source=exe_inputs,

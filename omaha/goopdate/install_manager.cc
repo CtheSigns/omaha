@@ -192,7 +192,7 @@ HRESULT InstallManager::InstallApp(bool is_machine,
         next_version.install_manifest()->install_actions,
         is_update ? xml::InstallAction::kUpdate : xml::InstallAction::kInstall,
         &action);
-    ASSERT1(is_event_found);
+    //ASSERT1(is_event_found);
     if (is_event_found) {
       manifest_arguments = action.program_arguments;
 
