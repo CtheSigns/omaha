@@ -68,16 +68,16 @@ const TCHAR* const kUrlPing =
 //
 // Crash reports.
 const TCHAR* const kUrlCrashReport =
-    _T("https://omaha-tutorial-224e6b7b.omaha-consulting.com/cr/report");
+    _T("http://localhost:9090/service/cr/report");
 
 // More information url.
 // Must allow query parameters to be appended to it.
 const TCHAR* const kUrlMoreInfo =
-    _T("https://omaha-tutorial-224e6b7b.omaha-consulting.com/support/installer/?");
+    _T("http://localhost:9090/service/support/installer/?");
 
 // Code Red check url.
 const TCHAR* const kUrlCodeRedCheck =
-    _T("https://omaha-tutorial-224e6b7b.omaha-consulting.com/service/check2?crx3=true");
+    _T("http://localhost:9090/service/check2?crx3=true");
 
 // Usage stats url.
 const TCHAR* const kUrlUsageStatsReport =

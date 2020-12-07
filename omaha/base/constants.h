@@ -83,16 +83,9 @@ const TCHAR* const kCompanyInternalLanGroupName = COMPANY_DOMAIN_BASE;
 // MAIN_EXE_BASE_NAME = "GoogleUpdate"
 #define MAIN_EXE_BASE_NAME  _T(MAIN_EXE_BASE_NAME_ANSI)
 
-#define STRING2(x) #x
-#define STRING(x) STRING2(x)
-
-#pragma message(STRING(MAIN_EXE_BASE_NAME))
-
-
 // Base name of the main DLL.
 // MAIN_DLL_BASE_NAME = "goopdate"
 #define MAIN_DLL_BASE_NAME _T(MAIN_DLL_BASE_NAME_ANSI)
-#pragma message(STRING(MAIN_DLL_BASE_NAME_ANSI))
 
 // Application name.
 // Use the localized IDS_PRODUCT_DISPLAY_NAME or the formatted
@@ -101,9 +94,6 @@ const TCHAR* const kCompanyInternalLanGroupName = COMPANY_DOMAIN_BASE;
 // TODO(omaha): Maybe rename all of these kOmahaAppName.
 const TCHAR* const kAppName = _T(OMAHA_APP_NAME_ANSI);
 
-#pragma message(STRING(OMAHA_APP_NAME_ANSI))
-
-//#error wtf
 #define COMPANY_NAME_IDENTIFIER SHORT_COMPANY_NAME
 #define PRODUCT_NAME_IDENTIFIER PRODUCT_NAME
 #define APP_NAME_IDENTIFIER SHORT_COMPANY_NAME PRODUCT_NAME
