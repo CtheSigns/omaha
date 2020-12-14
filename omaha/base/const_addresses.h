@@ -58,26 +58,27 @@ const TCHAR* const kGoopdateServer = _T("tools.") COMPANY_DOMAIN;
 // The channel for update checks is secured by using CUP to sign the messages.
 // It does not depend solely on https security in any case.
 const TCHAR* const kUrlUpdateCheck =
-    _T("http://localhost:9090/service/update2");
+    _T("https://update-dev.cthesigns.co.uk/service/update2");
 
 // Pings.
 const TCHAR* const kUrlPing =
-  _T("http://localhost:9090/service/update2");
+  _T("https://update-dev.cthesigns.co.uk/service/update2");
 
 // The urls below never fall back to http.
 //
 // Crash reports.
 const TCHAR* const kUrlCrashReport =
-    _T("http://localhost:9090/service/cr/report");
+    _T("https://update-dev.cthesigns.co.uk/service/cr/report");
 
 // More information url.
 // Must allow query parameters to be appended to it.
 const TCHAR* const kUrlMoreInfo =
-    _T("http://localhost:9090/service/support/installer/?");
+    _T("https://update-dev.cthesigns.co.uk/service/support/installer/?");
 
+// BEGIN - we won't use that url's service
 // Code Red check url.
 const TCHAR* const kUrlCodeRedCheck =
-    _T("http://localhost:9090/service/check2?crx3=true");
+    _T("https://update-dev.cthesigns.co.uk/service/check2?crx3=true");
 
 // Usage stats url.
 const TCHAR* const kUrlUsageStatsReport =
@@ -90,6 +91,9 @@ const TCHAR* const kUrlDeviceManagement =
     _T("https://m.") COMPANY_DOMAIN _T("/devicemanagement/data/api");
 
 #endif  // defined(HAS_DEVICE_MANAGEMENT)
+
+// END - we won't use that url's service
+
 
 }  // namespace omaha
 
