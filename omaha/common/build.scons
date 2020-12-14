@@ -37,7 +37,6 @@ def BuildCommonLib(env):
       'ping_event.cc',
       'ping_event_download_metrics.cc',
       'scheduled_task_utils.cc',
-      'stats_uploader.cc',
       'update3_utils.cc',
       'update_request.cc',
       'update_response.cc',

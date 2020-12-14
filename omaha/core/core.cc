@@ -53,7 +53,6 @@
 #include "omaha/common/config_manager.h"
 #include "omaha/common/oem_install_utils.h"
 #include "omaha/common/scheduled_task_utils.h"
-#include "omaha/common/stats_uploader.h"
 #include "omaha/core/core_metrics.h"
 #include "omaha/core/system_monitor.h"
 #include "omaha/goopdate/app_command.h"
@@ -514,7 +513,6 @@ HRESULT Core::StartCrashHandler() const {
 void Core::AggregateMetrics() const {
   CORE_LOG(L2, (_T("[aggregate core metrics]")));
   CollectMetrics();
-  VERIFY_SUCCEEDED(omaha::AggregateMetrics(is_system_));
 }
 
 // Collects: working set, peak working set, handle count, process uptime,

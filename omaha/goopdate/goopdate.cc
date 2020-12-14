@@ -78,7 +78,6 @@
 #include "omaha/common/lang.h"
 #include "omaha/common/oem_install_utils.h"
 #include "omaha/common/scheduled_task_utils.h"
-#include "omaha/common/stats_uploader.h"
 #include "omaha/core/core.h"
 #include "omaha/goopdate/code_red_check.h"
 #include "omaha/goopdate/crash.h"
@@ -510,9 +509,7 @@ HRESULT GoopdateImpl::Main(HINSTANCE instance,
     did_install_uninstall_fail = FAILED(UninstallIfNecessary());
   } else if (!has_uninstalled_) {
     if (args_.mode == COMMANDLINE_MODE_UA) {
-      VERIFY_SUCCEEDED(AggregateAndReportMetrics(is_machine_, false));
     } else if (!is_machine_ || vista_util::IsUserAdmin()) {
-      VERIFY_SUCCEEDED(AggregateMetrics(is_machine_));
     }
   }
 
@@ -955,7 +952,6 @@ bool GoopdateImpl::IsMachineProcess() {
 
 HRESULT GoopdateImpl::HandleReportCrash() {
   ++metric_goopdate_handle_report_crash;
-  VERIFY_SUCCEEDED(AggregateMetrics(is_machine_));
 
   ConfigManager* cm = ConfigManager::Instance();
 
