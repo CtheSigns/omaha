@@ -295,9 +295,6 @@ class ConfigManager {
   // Returns the web page url where the 'Get Help' requests are sent.
   HRESULT GetMoreInfoUrl(CString* url) const;
 
-  // Returns the service endpoint where the usage stats requests are sent.
-  HRESULT GetUsageStatsReportUrl(CString* url) const;
-
 #if defined(HAS_DEVICE_MANAGEMENT)
   // Returns the Device Management API url.
   HRESULT GetDeviceManagementUrl(CString* url) const;

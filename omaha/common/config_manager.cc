@@ -922,20 +922,6 @@ HRESULT ConfigManager::GetMoreInfoUrl(CString* url) const {
   return S_OK;
 }
 
-HRESULT ConfigManager::GetUsageStatsReportUrl(CString* url) const {
-  ASSERT1(url);
-
-  if (SUCCEEDED(RegKey::GetValue(MACHINE_REG_UPDATE_DEV,
-                                 kRegValueNameUsageStatsReportUrl,
-                                 url))) {
-    CORE_LOG(L5, (_T("['usage stats report url' override %s]"), *url));
-    return S_OK;
-  }
-
-  *url = kUrlUsageStatsReport;
-  return S_OK;
-}
-
 #if defined(HAS_DEVICE_MANAGEMENT)
 
 HRESULT ConfigManager::GetDeviceManagementUrl(CString* url) const {

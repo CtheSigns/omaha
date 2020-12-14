@@ -53,7 +53,6 @@
 #include "omaha/common/crash_utils.h"
 #include "omaha/common/exception_handler.h"
 #include "omaha/common/goopdate_utils.h"
-#include "omaha/common/stats_uploader.h"
 #include "omaha/crashhandler/crashhandler_metrics.h"
 #include "omaha/crashhandler/crash_dump_util.h"
 #include "omaha/crashhandler/crash_worker.h"
@@ -355,10 +354,6 @@ void CrashHandler::StopServer() {
 HRESULT CrashHandler::StartCrashUploader(
     const CString& crash_filename,
     const CString& custom_info_filename) {
-  // Normally, we only aggregate metrics at process exit. Since the crash
-  // handler is long-running, however, we hardly ever exit. This call will do
-  // additional aggregation, so that we can report metrics in a timely manner.
-  ON_SCOPE_EXIT(AggregateMetrics, is_system_);
 
   // Count the number of crashes requested by applications.
   ++metric_oop_crashes_requested;

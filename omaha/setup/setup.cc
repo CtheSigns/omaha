@@ -48,7 +48,6 @@
 #include "omaha/common/goopdate_utils.h"
 #include "omaha/common/ping.h"
 #include "omaha/common/scheduled_task_utils.h"
-#include "omaha/common/stats_uploader.h"
 #include "omaha/setup/setup_files.h"
 #include "omaha/setup/setup_google_update.h"
 #include "omaha/setup/setup_metrics.h"
@@ -634,11 +633,8 @@ HRESULT Setup::DoProtectedUninstall(bool send_uninstall_ping) {
   }
 
   if (FAILED(hr)) {
-    VERIFY_SUCCEEDED(AggregateMetrics(is_machine_));
     return hr;
   }
-  hr = AggregateAndReportMetrics(is_machine_, true);
-  ASSERT1(SUCCEEDED(hr) || GOOPDATE_E_CANNOT_USE_NETWORK == hr);
 
   bool can_use_network = ConfigManager::Instance()->CanUseNetwork(is_machine_);
   if (can_use_network && send_uninstall_ping) {

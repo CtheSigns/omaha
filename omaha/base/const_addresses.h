@@ -80,10 +80,6 @@ const TCHAR* const kUrlMoreInfo =
 const TCHAR* const kUrlCodeRedCheck =
     _T("https://update-dev.cthesigns.co.uk/service/check2?crx3=true");
 
-// Usage stats url.
-const TCHAR* const kUrlUsageStatsReport =
-    _T("https://clients5.") COMPANY_DOMAIN _T("/tbproxy/usagestats");
-
 #if defined(HAS_DEVICE_MANAGEMENT)
 
 // Device Management API url.

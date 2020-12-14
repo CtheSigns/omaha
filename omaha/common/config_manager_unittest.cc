@@ -560,20 +560,6 @@ TEST_P(ConfigManagerTest, GetMoreInfoUrl) {
   EXPECT_STREQ(url, _T("http://moreinfo/"));
 }
 
-// Tests the GetUsageStatsReportUrl override.
-TEST_P(ConfigManagerTest, GetUsageStatsReportUrl) {
-  CString url;
-  EXPECT_SUCCEEDED(cm_->GetUsageStatsReportUrl(&url));
-  EXPECT_STREQ(url, kUrlUsageStatsReport);
-
-  EXPECT_SUCCEEDED(RegKey::SetValue(MACHINE_REG_UPDATE_DEV,
-                                    kRegValueNameUsageStatsReportUrl,
-                                    _T("http://usagestatsreport/")));
-  url.Empty();
-  EXPECT_SUCCEEDED(cm_->GetUsageStatsReportUrl(&url));
-  EXPECT_STREQ(url, _T("http://usagestatsreport/"));
-}
-
 // Tests LastCheckPeriodSec override.
 TEST_P(ConfigManagerTest, GetLastCheckPeriodSec_Default) {
   if (IsDM()) {

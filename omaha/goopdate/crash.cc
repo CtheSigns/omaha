@@ -52,7 +52,6 @@
 #include "omaha/common/event_logger.h"
 #include "omaha/common/goopdate_utils.h"
 #include "omaha/common/lang.h"
-#include "omaha/common/stats_uploader.h"
 #include "omaha/goopdate/goopdate_metrics.h"
 #include "omaha/third_party/smartany/scoped_any.h"
 #include "third_party/breakpad/src/client/windows/crash_generation/client_info.h"

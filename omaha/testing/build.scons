@@ -468,7 +468,6 @@ omaha_unittest_inputs = [
     '../common/ping_test.cc',
     '../common/protocol_definition_test.cc',
     '../common/scheduled_task_utils_unittest.cc',
-    '../common/stats_uploader_unittest.cc',
     '../common/update_request_unittest.cc',
     '../common/url_utils_unittest.cc',
     '../common/web_services_client_unittest.cc',
