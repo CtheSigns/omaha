@@ -169,6 +169,8 @@ bool IsUpdateAppsHourlyJitterDisabled() {
 // interval falls in the range: [LastCheckPeriodSec, LastCheckPeriodSec + 1hr).
 // No update check is made if the "updates suppressed" period is in effect.
 bool ShouldCheckForUpdates(bool is_machine) {
+      OPT_LOG(L1, (_T("[ShouldCheckForUpdates]")));
+
   ConfigManager* cm = ConfigManager::Instance();
 
   if (!cm->CanRetryNow(is_machine)) {
@@ -182,31 +184,45 @@ bool ShouldCheckForUpdates(bool is_machine) {
     OPT_LOG(L1, (_T("[ShouldCheckForUpdates returned 0][checks disabled]")));
     return false;
   }
+  OPT_LOG(L1, (_T("update_interval = %d"),update_interval ));
 
   const int time_since_last_check = cm->GetTimeSinceLastCheckedSec(is_machine);
+  OPT_LOG(L1, (_T("time_since_last_check = %d"),time_since_last_check ));
 
   bool should_check_for_updates = false;
 
-  if (ConfigManager::Instance()->AreUpdatesSuppressedNow()) {
+  if (ConfigManager::Instance()->AreUpdatesSuppressedNow()) 
+  {
+    OPT_LOG(L1, (_T("Updates are supressed")));
     should_check_for_updates = false;
-  } else if (time_since_last_check < update_interval) {
-    // Too soon.
+  } 
+  else if (time_since_last_check < update_interval) 
+  {
+    OPT_LOG(L1, (_T("Too soon to check for updates")));
     should_check_for_updates = false;
-  } else if (update_interval <= time_since_last_check &&
-             time_since_last_check < update_interval + kSecondsPerHour) {
+  } 
+  else if (update_interval <= time_since_last_check &&
+             time_since_last_check < update_interval + kSecondsPerHour) 
+  {
     // Defer some checks if not overridden or if the feature is not disabled.
     // Do not skip checks when errors happen in the RNG.
-    if (!is_period_overridden && !IsUpdateAppsHourlyJitterDisabled()) {
+    if (!is_period_overridden && !IsUpdateAppsHourlyJitterDisabled())
+    {
       const int kPercentageToSkip = 10;    // skip 10% of the checks.
       unsigned int random_value = 0;
-      if (!RandUint32(&random_value)) {
+      if (!RandUint32(&random_value)) 
+      {
         random_value = 0;
       }
       should_check_for_updates = random_value % 100 < 100 - kPercentageToSkip;
-    } else {
+    } 
+    else 
+    {
       should_check_for_updates = true;
     }
-  } else {
+  } 
+  else 
+  {
     ASSERT1(time_since_last_check >= update_interval + kSecondsPerHour);
     should_check_for_updates = true;
   }

@@ -737,7 +737,7 @@ HRESULT V2ScheduledTasks::CreateScheduledTaskXml(
   if (create_hourly_trigger) {
     hourly_trigger =
         _T("    <Repetition>\n")
-        _T("      <Interval>PT1H</Interval>\n")
+        _T("      <Interval>PT15M</Interval>\n")
         _T("      <Duration>P1D</Duration>\n")
         _T("    </Repetition>\n");
   }
