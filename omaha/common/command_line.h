@@ -103,13 +103,14 @@ struct CommandLineExtraArgs {
   CString experiment_labels;
   CString referral_id;
   CString language;
+  CString update_url;
+  CString pubkey;
 #if defined(HAS_DEVICE_MANAGEMENT)
   CString enrollment_token;
 #endif
   BrowserType browser_type;
   Tristate usage_stats_enable;
-  bool runtime_only;
-
+  bool runtime_only;  
   std::vector<CommandLineAppArgs> apps;
 };
 

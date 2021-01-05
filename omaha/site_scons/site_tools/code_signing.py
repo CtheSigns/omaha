@@ -59,7 +59,7 @@ def generate(env):
       # No certificate password by default.
       CERTIFICATE_PASSWORD='',
       # The default timestamp server.
-      TIMESTAMP_SERVER='http://timestamp.verisign.com/scripts/timestamp.dll',
+      TIMESTAMP_SERVER='http://timestamp.comodoca.com/authenticode',
       # The default timestamp server when dual-signing.
       SHA1_TIMESTAMP_SERVER='http://timestamp.comodoca.com/authenticode',
       # The default timestamp server for sha256 timestamps.

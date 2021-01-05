@@ -234,6 +234,10 @@ const TCHAR* const kCmdLineNoMetainstallerTag = _T("nomitag");
 // encoding as well as a UTF8 Signature.
 const TCHAR* const kCmdLineInstallerData = _T("/installerdata=");
 
+const TCHAR* const kArgPubkey = _T("pubkey");
+
+const TCHAR* const kArgUpdateUrl = _T("update_url");
+
 //
 // "Extra" arguments provided in the metainstaller tag.
 //

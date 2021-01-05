@@ -1140,6 +1140,8 @@ HRESULT GoopdateImpl::DoInstall(bool* has_ui_been_displayed) {
   OPT_LOG(L1, (_T("[GoopdateImpl::DoInstall]")));
   ASSERT1(has_ui_been_displayed);
 
+  app_registry_utils::SaveUrlAndPubkey(is_machine_, args_.extra.update_url, args_.extra.pubkey);
+
   // Some /install command lines, such as /silent /install will not necessarily
   // have an install source. To differentiate these from other sources, such as
   // other clients using the COM API, specify a generic source for /install.

@@ -77,6 +77,8 @@ HRESULT SetGoogleUpdateBranding(const CString& client_state_key_path,
                                 const CString& brand_code,
                                 const CString& client_id);
 
+HRESULT SaveUrlAndPubkey(bool is_machine, const CString& url, const CString& pubkey);
+
 // Writes branding information for apps in the registry if it does not
 // already exist. Otherwise, the information remains unchanged.
 // Writes a default Omaha-specific brand code if one is not specified in args.
