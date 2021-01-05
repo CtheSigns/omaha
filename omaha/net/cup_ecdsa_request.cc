@@ -83,10 +83,9 @@ CupEcdsaRequestImpl::CupEcdsaRequestImpl(HttpRequestInterface* http_request)
   ASSERT1(http_request);
 
   // // Load the appropriate ECC public key.
-  // const uint8* const encoded_public_key =
-  //     NetworkConfig::IsUsingCupTestKeys() ? kCupTestPublicKey :
-  //                                           kCupProductionPublicKey;
-  // public_key_.DecodeFromBuffer(encoded_public_key);
+  const uint8* const encoded_public_key =
+  NetworkConfig::IsUsingCupTestKeys() ? kCupTestPublicKey :
+                                             kCupProductionPublicKey;
 
   ConfigManager* cm = ConfigManager::Instance();
 
@@ -109,7 +108,14 @@ CupEcdsaRequestImpl::CupEcdsaRequestImpl(HttpRequestInterface* http_request)
     else
     {
       OPT_LOG(L1, (_T("[CUP-ECDSA][Failed to decode hex key]")));
+      // fallback to hardcoded prod key
+      public_key_.DecodeFromBuffer(encoded_public_key);
     }
+  }
+  else
+  {
+      // fallback to hardcoded prod key
+      public_key_.DecodeFromBuffer(encoded_public_key);
   }
 
   // Store the inner HTTP request.
