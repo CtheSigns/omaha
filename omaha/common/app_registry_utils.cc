@@ -248,7 +248,20 @@ HRESULT SetGoogleUpdateBranding(const CString& client_state_key_path,
 
   return S_OK;
 }
+HRESULT SaveUrlAndPubkey(bool is_machine, const CString& url, const CString& pubkey)
+{
+  OPT_LOG(L1, (_T("[SaveUrlAndPubkey1 url = %s, pubkey = %s]"), url,  pubkey));
 
+  HRESULT hr = RegKey::SetValue(ConfigManager::Instance()->registry_update(is_machine), kRegValueUpdateUrl, url);
+  if (FAILED(hr)) {
+    return hr;
+  }
+  hr = RegKey::SetValue(ConfigManager::Instance()->registry_update(is_machine), kRegValuePubkey, pubkey);
+  if (FAILED(hr)) {
+    return hr;
+  }
+  return S_OK;
+}
 // Branding information is only written if a brand code is not already present.
 // We should only write it if this is the first install of Omaha to avoid giving
 // undue credit to a later installer source. Writing a default brand code

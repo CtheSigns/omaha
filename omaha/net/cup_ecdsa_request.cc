@@ -31,6 +31,9 @@
 #include "omaha/base/security/sha256.h"
 #include "omaha/base/string.h"
 #include "omaha/base/utils.h"
+#include "omaha/common/config_manager.h"
+#include "omaha/common/goopdate_utils.h"
+#include "omaha/common/const_goopdate.h"
 #include "omaha/net/cup_ecdsa_metrics.h"
 #include "omaha/net/cup_ecdsa_utils.h"
 #include "omaha/net/http_client.h"
@@ -49,16 +52,65 @@ const uint8 CupEcdsaRequestImpl::kCupTestPublicKey[] =
 #include "omaha/net/cup_ecdsa_pubkey.1.h"
 ;   // NOLINT
 
+int HexValue(wchar_t c)
+{
+    if (c >= '0' && c <= '9') { return c - '0'; }
+    if (c >= 'A' && c <= 'F') { return c - 'A' + 10; }
+    if (c >= 'a' && c <= 'f') { return c - 'a' + 10; }
+
+    return -1;
+}
+
+bool HexToBin(CString& str, uint8* buffer)
+{
+  for (int i = 0; i < str.GetLength()/2; i++)
+  {
+      int firstDigit = HexValue(str[2 * i]);
+      int secondDigit = HexValue(str[2 * i + 1]);
+      if(firstDigit == -1 || secondDigit == -1)
+      {
+        return false;
+      }
+      buffer[i] = static_cast<uint8>(firstDigit * 16 + secondDigit);
+  }
+  return true;
+}
+
+
 CupEcdsaRequestImpl::CupEcdsaRequestImpl(HttpRequestInterface* http_request)
     : request_buffer_(NULL),
       request_buffer_length_(0) {
   ASSERT1(http_request);
 
-  // Load the appropriate ECC public key.
-  const uint8* const encoded_public_key =
-      NetworkConfig::IsUsingCupTestKeys() ? kCupTestPublicKey :
-                                            kCupProductionPublicKey;
-  public_key_.DecodeFromBuffer(encoded_public_key);
+  // // Load the appropriate ECC public key.
+  // const uint8* const encoded_public_key =
+  //     NetworkConfig::IsUsingCupTestKeys() ? kCupTestPublicKey :
+  //                                           kCupProductionPublicKey;
+  // public_key_.DecodeFromBuffer(encoded_public_key);
+
+  ConfigManager* cm = ConfigManager::Instance();
+
+
+  OPT_LOG(L1, (_T("[CUP-ECDSA][Loading key from registry]")));
+
+  bool is_machine = goopdate_utils::IsRunningFromDir(CSIDL_PROGRAM_FILES);
+  CString pubkeyStr;
+  HRESULT hr = RegKey::GetValue(cm->registry_update(is_machine), kRegValuePubkey, &pubkeyStr);
+  if(SUCCEEDED(hr))
+  {
+    OPT_LOG(L1, (_T("[CUP-ECDSA][Loaded key from registry: %s]"), pubkeyStr));
+    uint8 pubkey[200];
+    memset (pubkey,0,200);
+
+    if(HexToBin(pubkeyStr, pubkey))
+    {
+      public_key_.DecodeFromBuffer(pubkey);
+    }
+    else
+    {
+      OPT_LOG(L1, (_T("[CUP-ECDSA][Failed to decode hex key]")));
+    }
+  }
 
   // Store the inner HTTP request.
   http_request_.reset(http_request);

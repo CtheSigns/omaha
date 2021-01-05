@@ -876,8 +876,12 @@ HRESULT ConfigManager::GetPingUrl(CString* url) const {
     return S_OK;
   }
 
-  *url = kUrlPing;
-  return S_OK;
+   if (SUCCEEDED(RegKey::GetValue(MACHINE_REG_UPDATE, kRegValueUpdateUrl, url))) 
+  {
+    *url = *url + kUrlPingPath;
+    return S_OK;
+  }
+  return S_FALSE;
 }
 
 HRESULT ConfigManager::GetUpdateCheckUrl(CString* url) const {
@@ -890,8 +894,12 @@ HRESULT ConfigManager::GetUpdateCheckUrl(CString* url) const {
     return S_OK;
   }
 
-  *url = kUrlUpdateCheck;
-  return S_OK;
+  if (SUCCEEDED(RegKey::GetValue(MACHINE_REG_UPDATE, kRegValueUpdateUrl, url))) 
+  {
+    *url = *url + kUrlUpdateCheckPath;
+    return S_OK;
+  }
+  return S_FALSE;
 }
 
 HRESULT ConfigManager::GetCrashReportUrl(CString* url) const {
@@ -904,8 +912,12 @@ HRESULT ConfigManager::GetCrashReportUrl(CString* url) const {
     return S_OK;
   }
 
-  *url = kUrlCrashReport;
-  return S_OK;
+  if (SUCCEEDED(RegKey::GetValue(MACHINE_REG_UPDATE, kRegValueUpdateUrl, url))) 
+  {
+    *url = *url + kUrlCrashReportPath;
+    return S_OK;
+  }
+  return S_FALSE;
 }
 
 HRESULT ConfigManager::GetMoreInfoUrl(CString* url) const {
@@ -918,8 +930,12 @@ HRESULT ConfigManager::GetMoreInfoUrl(CString* url) const {
     return S_OK;
   }
 
-  *url = kUrlMoreInfo;
-  return S_OK;
+   if (SUCCEEDED(RegKey::GetValue(MACHINE_REG_UPDATE, kRegValueUpdateUrl, url))) 
+  {
+    *url = *url + kUrlMoreInfoPath;
+    return S_OK;
+  }
+  return S_FALSE;
 }
 
 #if defined(HAS_DEVICE_MANAGEMENT)

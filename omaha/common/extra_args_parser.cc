@@ -166,6 +166,8 @@ HRESULT StringToNeedsAdmin(const TCHAR* str, NeedsAdmin* value) {
 HRESULT ExtraArgsParser::Parse(const TCHAR* extra_args,
                                const TCHAR* app_args,
                                CommandLineExtraArgs* args) {
+   OPT_LOG(L2, (_T("[ExtraArgsParser::Parse]")));
+  
   HRESULT hr = ParseExtraArgs(extra_args, args);
   if (FAILED(hr)) {
     return hr;
@@ -242,6 +244,13 @@ HRESULT ExtraArgsParser::HandleToken(const CString& token,
     args->brand_code = value;
   } else if (name.CompareNoCase(kExtraArgClientId) == 0) {
     args->client_id = value;
+  } else if (name.CompareNoCase(kArgUpdateUrl) == 0) {
+    HRESULT hr = ConvertUtf8UrlEncodedString(value, &args->update_url);
+    if (FAILED(hr)) {
+      return hr;
+    }
+  } else if (name.CompareNoCase(kArgPubkey) == 0) {
+    args->pubkey = value;
   } else if (name.CompareNoCase(kExtraArgOmahaExperimentLabels) == 0) {
     HRESULT hr = ConvertUtf8UrlEncodedString(value,
                                              &args->experiment_labels);

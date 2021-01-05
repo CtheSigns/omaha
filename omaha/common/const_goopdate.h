@@ -234,6 +234,9 @@ const TCHAR* const kRegValueOemInstallTimeSec     = _T("OemInstallTime");
 const TCHAR* const kRegValueCacheSizeLimitMBytes  = _T("PackageCacheSizeLimit");
 const TCHAR* const kRegValueCacheLifeLimitDays    = _T("PackageCacheLifeLimit");
 const TCHAR* const kRegValueInstalledPath         = _T("path");
+const TCHAR* const kRegValueUpdateUrl             = _T("update_url");
+const TCHAR* const kRegValuePubkey                = _T("pubkey");
+
 const TCHAR* const kRegValueUninstallCmdLine      = _T("UninstallCmdLine");
 const TCHAR* const kRegValueSelfUpdateExtraCode1  = _T("UpdateCode1");
 const TCHAR* const kRegValueSelfUpdateErrorCode   = _T("UpdateError");
