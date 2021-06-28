@@ -57,6 +57,12 @@ class CommandLineBuilder {
   CString install_source() const { return install_source_; }
   void set_install_source(const CString& install_source);
 
+  CString app_username() const { return app_username_; }
+  void set_app_username(const CString& app_username);
+
+  CString app_password() const { return app_password_; }
+  void set_app_password(const CString& app_password);
+
   CString session_id() const { return session_id_; }
   void set_session_id(const CString& session_id);
 
@@ -135,6 +141,8 @@ class CommandLineBuilder {
   CString ping_string_;
   CString offline_dir_name_;
   CString session_id_;
+  CString app_username_;
+  CString app_password_;
 
   DISALLOW_COPY_AND_ASSIGN(CommandLineBuilder);
 };

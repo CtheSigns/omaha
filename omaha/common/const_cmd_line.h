@@ -191,6 +191,10 @@ const TCHAR* const kCmdLineInteractive = _T("i");
 // the "install", "handoff", and "update" modes.
 const TCHAR* const kCmdLineSessionId = _T("sessionid");
 
+
+const TCHAR* const kCmdLineAppUsername = _T("username");
+const TCHAR* const kCmdLineAppPassword = _T("password");
+
 // The "installsource" switch that is used to pass the source of installation
 // for ping tracking.  For example:  "/installsource taggedmi".
 const TCHAR* const kCmdLineInstallSource = _T("installsource");

@@ -294,6 +294,12 @@ interface IApp : IDispatch {
   [propget] HRESULT clientInstallData([out, retval] BSTR*);
   [propput] HRESULT clientInstallData([in] BSTR);
 
+  [propget] HRESULT appUsername([out, retval] BSTR*);
+  [propput] HRESULT appUsername([in] BSTR);
+
+  [propget] HRESULT appPassword([out, retval] BSTR*);
+  [propput] HRESULT appPassword([in] BSTR);
+
   [propget] HRESULT serverInstallDataIndex([out, retval] BSTR*);
   [propput] HRESULT serverInstallDataIndex([in] BSTR);
 

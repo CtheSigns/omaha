@@ -43,7 +43,9 @@ namespace omaha {
 namespace {
 
 CString BuildMsiCommandLine(const CString& arguments,
-                            const CString& msi_file_path,
+                            const CString& msi_file_path,                            
+                            const CString& app_username,
+                            const CString& app_password,
                             const CString& enclosed_installer_data_file_path) {
   CORE_LOG(L3, (_T("[CreateMsiCommandLine]")));
 
@@ -63,6 +65,19 @@ CString BuildMsiCommandLine(const CString& arguments,
                           kMsiSuppressAllRebootsCmdLine,
                           msi_file_path);
 
+   OPT_LOG(L3, (_T("[BuildMsiCommandLine::AppCredentials] username length = %d, password length = %d"), app_username.GetLength(), app_password.GetLength()));
+
+  if(!app_username.IsEmpty())
+  {
+    SafeCStringAppendFormat(&command_line, _T(" USERNAME=\"%s\" "), app_username);
+  }
+
+  if(!app_password.IsEmpty())
+  {
+    SafeCStringAppendFormat(&command_line, _T(" PASSWORD=\"%s\" "), app_password);
+  }
+
+
   // The msiexec version in XP SP2 (V 3.01) and higher supports the /log switch.
   if (SystemInfo::IsRunningOnXPSP2OrLater()) {
     CString logfile(msi_file_path);
@@ -70,6 +85,8 @@ CString BuildMsiCommandLine(const CString& arguments,
 
     SafeCStringAppendFormat(&command_line, _T(" /log \"%s\""), logfile);
   }
+
+
 
   CORE_LOG(L2, (_T("[msiexec command line][%s]"), command_line));
   return command_line;
@@ -158,6 +175,8 @@ HRESULT InstallerWrapper::InstallApp(HANDLE user_token,
                                      const CString& installer_path,
                                      const CString& arguments,
                                      const CString& installer_data,
+                                     const CString& app_username,
+                                     const CString& app_password,
                                      const CString& language,
                                      const CString& untrusted_data,
                                      int install_priority,
@@ -169,6 +188,8 @@ HRESULT InstallerWrapper::InstallApp(HANDLE user_token,
                             installer_path,
                             arguments,
                             installer_data,
+                            app_username,
+                            app_password,
                             language,
                             untrusted_data,
                             install_priority,
@@ -255,6 +276,8 @@ HRESULT InstallerWrapper::BuildCommandLineFromFilename(
     const CString& file_path,
     const CString& arguments,
     const CString& installer_data,
+    const CString& app_username,
+    const CString& app_password,
     CString* executable_path,
     CString* command_line,
     InstallerType* installer_type) {
@@ -301,8 +324,10 @@ HRESULT InstallerWrapper::BuildCommandLineFromFilename(
                     *executable_path, *command_line));
     } else if (0 == lstrcmpi(ext, _T("msi"))) {
       *executable_path = _T("msiexec");
-      *command_line = BuildMsiCommandLine(arguments,
+      *command_line = BuildMsiCommandLine(arguments,                                
                                           file_path,
+                                          app_username,
+                                          app_password,
                                           enclosed_installer_data_file_path);
       *installer_type = MSI_INSTALLER;
 
@@ -335,6 +360,8 @@ HRESULT InstallerWrapper::ExecuteAndWaitForInstaller(
     InstallerType installer_type,
     const CString& language,
     const CString& untrusted_data,
+    const CString& app_username,
+    const CString& app_password,
     int install_priority,
     InstallerResultInfo* result_info) {
   CORE_LOG(L3, (_T("[InstallerWrapper::ExecuteAndWaitForInstaller]")));
@@ -371,6 +398,8 @@ HRESULT InstallerWrapper::ExecuteAndWaitForInstaller(
                                       installer_type,
                                       language,
                                       untrusted_data,
+                                      app_username,
+                                      app_password,
                                       install_priority,
                                       result_info);
     if (FAILED(hr)) {
@@ -424,10 +453,17 @@ HRESULT InstallerWrapper::DoExecuteAndWaitForInstaller(
     InstallerType installer_type,
     const CString& language,
     const CString& untrusted_data,
+    const CString& app_username,
+    const CString& app_password,
     int install_priority,
     InstallerResultInfo* result_info) {
+
+  CString command_line_for_logging = command_line;
+  command_line_for_logging.Replace(app_username, _T("***"));  
+  command_line_for_logging.Replace(app_password, _T("***"));
+
   OPT_LOG(L1, (_T("[Running installer][%s][%s][%s]"),
-               executable_path, command_line, GuidToString(app_guid)));
+               executable_path, command_line_for_logging, GuidToString(app_guid)));
   ASSERT1(result_info);
 
   AppManager::Instance()->ClearInstallerResultApiValues(app_guid);
@@ -457,7 +493,7 @@ HRESULT InstallerWrapper::DoExecuteAndWaitForInstaller(
                                       &env_block.front());
   if (FAILED(hr)) {
     OPT_LOG(LE, (_T("[p.Start fail][0x%08x][%s][%s]"),
-        hr, executable_path, command_line));
+        hr, executable_path, command_line_for_logging));
     set_error_extra_code1(static_cast<int>(hr));
     return GOOPDATEINSTALL_E_INSTALLER_FAILED_START;
   }
@@ -483,7 +519,7 @@ HRESULT InstallerWrapper::DoExecuteAndWaitForInstaller(
 
   if (result_info->type != INSTALLER_RESULT_SUCCESS) {
     OPT_LOG(LE, (_T("[Installer failed][%s][%s][%u]"),
-                 executable_path, command_line, result_info->code));
+                 executable_path, command_line_for_logging, result_info->code));
   }
 
   return hr;
@@ -703,6 +739,8 @@ HRESULT InstallerWrapper::DoInstallApp(HANDLE user_token,
                                        const CString& installer_path,
                                        const CString& arguments,
                                        const CString& installer_data,
+                                       const CString& app_username,
+                                       const CString& app_password,
                                        const CString& language,
                                        const CString& untrusted_data,
                                        int install_priority,
@@ -726,6 +764,8 @@ HRESULT InstallerWrapper::DoInstallApp(HANDLE user_token,
   HRESULT hr = BuildCommandLineFromFilename(installer_path,
                                             modified_arguments,
                                             installer_data,
+                                            app_username,
+                                            app_password,
                                             &executable_path,
                                             &command_line,
                                             &installer_type);
@@ -746,6 +786,8 @@ HRESULT InstallerWrapper::DoInstallApp(HANDLE user_token,
                                     installer_type,
                                     language,
                                     untrusted_data,
+                                    app_username,
+                                    app_password,
                                     install_priority,
                                     result_info);
   }

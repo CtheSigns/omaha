@@ -455,6 +455,8 @@ HRESULT LaunchHandoffProcess(bool is_machine,
   builder.set_app_args(install_args.app_args_str);
   builder.set_install_source(install_args.install_source);
   builder.set_session_id(session_id);
+  builder.set_app_username(install_args.extra.app_username);
+  builder.set_app_password(install_args.extra.app_password);
 
   if (!offline_dir_name.IsEmpty()) {
     HRESULT hr = builder.SetOfflineDirName(offline_dir_name);

@@ -241,6 +241,12 @@ class App : public ModelObject {
   STDMETHOD(get_clientInstallData)(BSTR* data);
   STDMETHOD(put_clientInstallData)(BSTR data);
 
+  STDMETHOD(get_appUsername)(BSTR* data);
+  STDMETHOD(put_appUsername)(BSTR data);
+
+  STDMETHOD(get_appPassword)(BSTR* data);
+  STDMETHOD(put_appPassword)(BSTR data);
+
   STDMETHOD(get_serverInstallDataIndex)(BSTR* index);
   STDMETHOD(put_serverInstallDataIndex)(BSTR index);
 
@@ -264,7 +270,8 @@ class App : public ModelObject {
   // in STATE_UPDATE_AVAILABLE and later.
   CString GetInstallData() const;
 
-
+  CString GetAppUsername() const;
+  CString GetAppPassword() const;
   //
   // App state machine transition conditions. These functions make
   // the application change states.
@@ -484,6 +491,10 @@ class App : public ModelObject {
   // contained in /appdata).
   CString client_install_data_;
 
+  CString app_username_;
+  CString app_password_;
+
+
   // Contains the installer data string returned by the server for
   // server_install_data_index_.
   CString server_install_data_;
@@ -582,6 +593,12 @@ class ATL_NO_VTABLE AppWrapper
 
   STDMETHOD(get_clientInstallData)(BSTR* data);
   STDMETHOD(put_clientInstallData)(BSTR data);
+
+  STDMETHOD(get_appUsername)(BSTR* data);
+  STDMETHOD(put_appUsername)(BSTR data);
+
+  STDMETHOD(get_appPassword)(BSTR* data);
+  STDMETHOD(put_appPassword)(BSTR data);
 
   STDMETHOD(get_serverInstallDataIndex)(BSTR* index);
   STDMETHOD(put_serverInstallDataIndex)(BSTR index);
