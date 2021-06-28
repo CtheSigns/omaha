@@ -278,6 +278,32 @@ STDMETHODIMP App::put_clientInstallData(BSTR data) {
   return S_OK;
 }
 
+STDMETHODIMP App::get_appUsername(BSTR* data) {
+  __mutexScope(model()->lock());
+  ASSERT1(data);
+  *data = app_username_.AllocSysString();
+  return S_OK;
+}
+
+STDMETHODIMP App::get_appPassword(BSTR* data) {
+  __mutexScope(model()->lock());
+  ASSERT1(data);
+  *data = app_password_.AllocSysString();
+  return S_OK;
+}
+
+STDMETHODIMP App::put_appUsername(BSTR data) {
+  __mutexScope(model()->lock());
+  app_username_ = data;
+  return S_OK;
+
+}
+STDMETHODIMP App::put_appPassword(BSTR data) {
+  __mutexScope(model()->lock());
+  app_password_ = data;
+  return S_OK;
+}
+
 STDMETHODIMP App::get_serverInstallDataIndex(BSTR* index) {
   __mutexScope(model()->lock());
   ASSERT1(index);
@@ -1249,6 +1275,16 @@ CString App::GetInstallData() const {
   return server_install_data_;
 }
 
+CString App::GetAppUsername() const {
+  __mutexScope(model()->lock());
+
+  return app_username_;
+}
+CString App::GetAppPassword() const {
+  __mutexScope(model()->lock());
+
+  return app_password_;
+}
 // IApp.
 STDMETHODIMP AppWrapper::get_currentVersion(IDispatch** current_version) {
   __mutexScope(model()->lock());
@@ -1416,6 +1452,26 @@ STDMETHODIMP AppWrapper::get_clientInstallData(BSTR* data) {
 STDMETHODIMP AppWrapper::put_clientInstallData(BSTR data) {
   __mutexScope(model()->lock());
   return wrapped_obj()->put_clientInstallData(data);
+}
+
+STDMETHODIMP AppWrapper::get_appUsername(BSTR* data) {
+  __mutexScope(model()->lock());
+  return wrapped_obj()->get_appUsername(data);
+}
+
+STDMETHODIMP AppWrapper::put_appUsername(BSTR data) {
+  __mutexScope(model()->lock());
+  return wrapped_obj()->put_appUsername(data);
+}
+
+STDMETHODIMP AppWrapper::get_appPassword(BSTR* data) {
+  __mutexScope(model()->lock());
+  return wrapped_obj()->get_appPassword(data);
+}
+
+STDMETHODIMP AppWrapper::put_appPassword(BSTR data) {
+  __mutexScope(model()->lock());
+  return wrapped_obj()->put_appPassword(data);
 }
 
 STDMETHODIMP AppWrapper::get_serverInstallDataIndex(BSTR* index) {

@@ -155,6 +155,8 @@ HRESULT InstallManager::InstallApp(bool is_machine,
   CString manifest_arguments;
   CString installer_data;
   CString expected_version;
+  CString app_username;
+  CString app_password;
 
   AppManager& app_manager = *AppManager::Instance();
   __mutexScope(app_manager.GetRegistryStableStateLock());
@@ -206,6 +208,10 @@ HRESULT InstallManager::InstallApp(bool is_machine,
     }
 
     installer_data = app->GetInstallData();
+    app_username = app->GetAppUsername();
+    app_password = app->GetAppPassword();
+
+    OPT_LOG(LE, (_T("[AppManager::AppCredentials to use] username length = %d, password length = %d"), app_username.GetLength(), app_password.GetLength()));
 
     expected_version = next_version.install_manifest()->version;
 
@@ -254,6 +260,8 @@ HRESULT InstallManager::InstallApp(bool is_machine,
                                              installer_path,
                                              manifest_arguments,
                                              installer_data,
+                                             app_username,
+                                             app_password,
                                              language,
                                              app->untrusted_data(),
                                              install_priority,

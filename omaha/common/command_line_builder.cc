@@ -89,6 +89,20 @@ void CommandLineBuilder::set_install_source(const CString& install_source) {
   install_source_ = install_source;
 }
 
+void CommandLineBuilder::set_app_username(const CString& app_username) {
+  ASSERT1(mode_ == COMMANDLINE_MODE_INSTALL ||
+          mode_ == COMMANDLINE_MODE_HANDOFF_INSTALL ||
+          mode_ == COMMANDLINE_MODE_UA);
+  app_username_ = app_username;
+}
+
+void CommandLineBuilder::set_app_password(const CString& app_password) {
+  ASSERT1(mode_ == COMMANDLINE_MODE_INSTALL ||
+          mode_ == COMMANDLINE_MODE_HANDOFF_INSTALL ||
+          mode_ == COMMANDLINE_MODE_UA);
+  app_password_ = app_password;
+}
+
 void CommandLineBuilder::set_session_id(const CString& session_id) {
   ASSERT1(mode_ == COMMANDLINE_MODE_INSTALL ||
           mode_ == COMMANDLINE_MODE_HANDOFF_INSTALL ||
@@ -410,6 +424,14 @@ CString CommandLineBuilder::GetHandoffInstall() const {
                             kCmdLineOfflineDir,
                             offline_dir_name_.GetString());
   }
+  
+  if(!app_username_.IsEmpty()) {
+        SafeCStringAppendFormat(&cmd_line, _T(" /%s \"%s\""), kCmdLineAppUsername, app_username_.GetString());
+  }
+  if(!app_password_.IsEmpty())  {
+        SafeCStringAppendFormat(&cmd_line, _T(" /%s \"%s\""), kCmdLineAppPassword, app_password_.GetString());
+  }     
+
   return cmd_line;
 }
 

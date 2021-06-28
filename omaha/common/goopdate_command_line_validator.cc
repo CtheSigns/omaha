@@ -91,12 +91,12 @@ HRESULT GoopdateCommandLineValidator::Setup() {
   // COM server mode, but only for the OnDemand.
   CreateScenario(kCmdLineOnDemand, &GoopdateCommandLineValidator::OnDemand);
 
-  // gu.exe /install <extraargs> [/appargs <appargs> [/installsource source
+  // gu.exe /install <extraargs> /username <username> [/appargs <appargs> [/installsource source
   //        [/silent [/eularequired [/oem [/installelevated [/sessionid <sid>
   //        [/enterprise
   SafeCStringFormat(
-      &cmd_line, _T("/%s extra [/%s appargs [/%s src [/%s [/%s [/%s [/%s ")
-                 _T("[/%s sid [/%s"),
+      &cmd_line, _T("/%s extra  [/%s appargs [/%s src [/%s [/%s [/%s [/%s ")
+                 _T("[/%s sid [/%s [/username username [/password password"),
                  kCmdLineInstall,
                  kCmdLineAppArgs,
                  kCmdLineInstallSource,
@@ -108,6 +108,7 @@ HRESULT GoopdateCommandLineValidator::Setup() {
                  kCmdLineEnterprise);
   CreateScenario(cmd_line, &GoopdateCommandLineValidator::OnInstall);
 
+
   // gu.exe /update [/sessionid <sid>
   SafeCStringFormat(&cmd_line, _T("/%s [/%s sid"),
                     kCmdLineUpdate, kCmdLineSessionId);
@@ -118,7 +119,7 @@ HRESULT GoopdateCommandLineValidator::Setup() {
   //        [/sessionid <sid> [/enterprise
   SafeCStringFormat(
       &cmd_line, _T("/%s extra [/%s appargs [/%s src [/%s [/%s [/%s [/%s dir ")
-                 _T("[/%s sid [/%s"),
+                 _T("[/%s sid [/%s [/username username [/password password"),
                  kCmdLineAppHandoffInstall,
                  kCmdLineAppArgs,
                  kCmdLineInstallSource,
@@ -331,6 +332,15 @@ HRESULT GoopdateCommandLineValidator::OnInstall() {
   parser_->GetSwitchArgumentValue(kCmdLineSessionId,
                                   0,
                                   &args_->session_id);
+
+  parser_->GetSwitchArgumentValue(kCmdLineAppUsername,
+                                  0,
+                                  &args_->extra.app_username);
+
+ parser_->GetSwitchArgumentValue(kCmdLineAppPassword,
+                                  0,
+                                  &args_->extra.app_password);
+  
   args_->is_silent_set = parser_->HasSwitch(kCmdLineSilent);
   args_->is_enterprise_set = parser_->HasSwitch(kCmdLineEnterprise);
   args_->is_eula_required_set = parser_->HasSwitch(kCmdLineEulaRequired);
@@ -355,6 +365,16 @@ HRESULT GoopdateCommandLineValidator::OnInstallHandoffWorker() {
   parser_->GetSwitchArgumentValue(kCmdLineSessionId,
                                   0,
                                   &args_->session_id);
+
+
+  parser_->GetSwitchArgumentValue(kCmdLineAppUsername,
+                                  0,
+                                  &args_->extra.app_username);
+
+ parser_->GetSwitchArgumentValue(kCmdLineAppPassword,
+                                  0,
+                                  &args_->extra.app_password);
+
   args_->is_silent_set = parser_->HasSwitch(kCmdLineSilent);
   args_->is_enterprise_set = parser_->HasSwitch(kCmdLineEnterprise);
   args_->is_eula_required_set = parser_->HasSwitch(kCmdLineEulaRequired);

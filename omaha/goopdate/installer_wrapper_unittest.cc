@@ -677,6 +677,8 @@ TEST_F(InstallerWrapperUserTest, InstallApp_InstallerWithoutFilenameExtension) {
                             _T("c:\\temp\\foo"),
                             _T(""),  // Arguments.
                             _T(""),  // Installer data.
+                            _T(""),
+                            _T(""),
                             kLanguageEnglish,
                             _T(""),  // Untrusted data.
                             0,
@@ -698,6 +700,8 @@ TEST_F(InstallerWrapperUserTest,
                             _T("c:\\temp\\foo.bar"),
                             _T(""),  // Arguments.
                             _T(""),  // Installer data.
+                            _T(""),
+                            _T(""),
                             kLanguageEnglish,
                             _T(""),  // Untrusted data.
                             0,
@@ -718,6 +722,8 @@ TEST_F(InstallerWrapperUserTest, InstallApp_InstallerEmtpyFilename) {
                             _T(""),
                             _T(""),  // Arguments.
                             _T(""),  // Installer data.
+                            _T(""),
+                            _T(""),
                             kLanguageEnglish,
                             _T(""),  // Untrusted data.
                             0,
@@ -739,6 +745,8 @@ TEST_F(InstallerWrapperUserTest, InstallApp_ExeFileDoesNotExist) {
                             _T("c:\\temp\\foo.exe"),
                             _T(""),  // Arguments.
                             _T(""),  // Installer data.
+                            _T(""),
+                            _T(""),
                             kLanguageEnglish,
                             _T(""),  // Untrusted data.
                             0,
@@ -786,6 +794,8 @@ TEST_F(InstallerWrapperUserTest, InstallApp_ExeInstallerWithArgumentsSucceeds) {
                                    cmd_exe_path_,
                                    arguments,
                                    _T(""),  // Installer data.
+                                   _T(""),
+                                   _T(""),
                                    kLanguageEnglish,
                                    _T(""),  // Untrusted data.
                                    0,
@@ -826,6 +836,8 @@ TEST_F(InstallerWrapperUserTest,
                             cmd_exe_path_,
                             arguments,
                             _T(""),  // Installer data.
+                            _T(""),
+                            _T(""),
                             kLanguageEnglish,
                             _T(""),  // Untrusted data.
                             0,
@@ -924,6 +936,8 @@ TEST_F(InstallerWrapperMachineTest, InstallApp_MsiInstallerSucceeds) {
                                    installer_full_path,
                                    _T(""),  // Arguments.
                                    _T(""),  // Installer data.
+                                   _T(""),
+                                   _T(""),
                                    kLanguageEnglish,
                                    _T(""),  // Untrusted data.
                                    0,
@@ -989,6 +1003,8 @@ TEST_F(InstallerWrapperMachineTest,
                                    installer_full_path,
                                    kFooInstallerBarPropertyArg,
                                    _T(""),  // Installer data.
+                                   _T(""),
+                                   _T(""),
                                    kLanguageEnglish,
                                    _T(""),  // Untrusted data.
                                    0,
@@ -1044,6 +1060,8 @@ TEST_F(InstallerWrapperUserTest, InstallApp_UpdateOmahaSucceeds) {
                                    cmd_exe_path_,
                                    arguments,
                                    _T(""),  // Installer data.
+                                   _T(""),
+                                   _T(""),
                                    kLanguageEnglish,
                                    _T(""),  // Untrusted data.
                                    0,
@@ -1083,6 +1101,8 @@ TEST_F(InstallerWrapperUserTest,
                                    cmd_exe_path_,
                                    arguments,
                                    _T(""),  // Installer data.
+                                   _T(""),
+                                   _T(""),
                                    kLanguageEnglish,
                                    _T(""),  // Untrusted data.
                                    0,
@@ -1110,6 +1130,8 @@ TEST_F(InstallerWrapperUserTest, InstallApp_InstallerDoesNotWriteClientsKey) {
                                    cmd_exe_path_,
                                    arguments,
                                    _T(""),  // Installer data.
+                                    _T(""),
+                                  _T(""),
                                    kLanguageEnglish,
                                    _T(""),  // Untrusted data.
                                    0,
@@ -1146,7 +1168,9 @@ TEST_F(InstallerWrapperUserTest,
                             kAppGuid,
                             msi_path,
                             _T(""),  // Arguments.
-                            _T(""),  // Installer data.
+                            _T(""),  // Installer data. 
+                            _T(""),
+                            _T(""),
                             kLanguageEnglish,
                             _T(""),  // Untrusted data.
                             0,
@@ -1191,6 +1215,8 @@ TEST_F(InstallerWrapperUserTest, InstallApp_MsiIsBusy_NoRetries) {
                             cmd_exe_path_,
                             arguments,
                             _T(""),  // Installer data.
+                             _T(""),
+                            _T(""),
                             kLanguageEnglish,
                             _T(""),  // Untrusted data.
                             0,
@@ -1229,6 +1255,8 @@ TEST_F(InstallerWrapperUserTest, InstallApp_MsiIsBusy_TwoTries) {
                             cmd_exe_path_,
                             arguments,
                             _T(""),  // Installer data.
+                            _T(""),
+                            _T(""),
                             kLanguageEnglish,
                             _T(""),  // Untrusted data.
                             0,
@@ -1282,6 +1310,8 @@ TEST_F(InstallerWrapperUserTest, InstallApp_InstallMultipleApps) {
                                    cmd_exe_path_,
                                    arguments1,
                                    _T(""),  // Installer data.
+                                   _T(""),
+                                   _T(""),
                                    kLanguageEnglish,
                                    _T(""),  // Untrusted data.
                                    0,
@@ -1310,6 +1340,8 @@ TEST_F(InstallerWrapperUserTest, InstallApp_InstallMultipleApps) {
                                    cmd_exe_path_,
                                    arguments2,
                                    _T(""),  // Installer data.
+                                   _T(""),
+                                   _T(""),
                                    kLanguageEnglish,
                                    _T(""),  // Untrusted data.
                                    0,

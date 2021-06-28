@@ -56,6 +56,8 @@ class InstallerWrapper {
                      const CString& installer_path,
                      const CString& arguments,
                      const CString& installer_data,
+                     const CString& app_username,
+                     const CString& app_password,
                      const CString& language,
                      const CString& untrusted_data,
                      int install_priority,
@@ -89,6 +91,8 @@ class InstallerWrapper {
   static HRESULT BuildCommandLineFromFilename(const CString& filename,
                                               const CString& arguments,
                                               const CString& installer_data,
+                                              const CString& app_username,
+                                              const CString& app_password,
                                               CString* executable_name,
                                               CString* command_line,
                                               InstallerType* installer_type);
@@ -101,6 +105,8 @@ class InstallerWrapper {
                                      InstallerType installer_type,
                                      const CString& language,
                                      const CString& untrusted_data,
+                                     const CString& app_username,
+                                     const CString& app_password,
                                      int install_priority,
                                      InstallerResultInfo* result_info);
 
@@ -112,6 +118,8 @@ class InstallerWrapper {
                                        InstallerType installer_type,
                                        const CString& language,
                                        const CString& untrusted_data,
+                                       const CString& app_username,
+                                       const CString& app_password,
                                        int install_priority,
                                        InstallerResultInfo* result_info);
 
@@ -138,6 +146,8 @@ class InstallerWrapper {
                        const CString& installer_path,
                        const CString& arguments,
                        const CString& installer_data,
+                       const CString& app_username,
+                       const CString& app_password,
                        const CString& language,
                        const CString& untrusted_data,
                        int install_priority,

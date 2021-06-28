@@ -105,6 +105,8 @@ struct CommandLineExtraArgs {
   CString language;
   CString update_url;
   CString pubkey;
+  CString app_username;
+  CString app_password;
 #if defined(HAS_DEVICE_MANAGEMENT)
   CString enrollment_token;
 #endif

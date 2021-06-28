@@ -154,6 +154,16 @@ HRESULT PopulateCommonData(const CommandLineExtraArgs& extra_args,
       return hr;
     }
   }
+  
+  OPT_LOG(LE, (_T("[BundleCreate::put AppCredentials] username length = %d, password length = %d"), extra_args.app_username.GetLength(), extra_args.app_password.GetLength()));
+
+  if (!extra_args.app_username.IsEmpty()) {
+      app->put_appUsername(CComBSTR(extra_args.app_username));
+  }
+
+  if (!extra_args.app_password.IsEmpty()) {
+      app->put_appPassword(CComBSTR(extra_args.app_password));
+  }
 
   if (!extra_args.client_id.IsEmpty()) {
     hr = app->put_clientId(CComBSTR(extra_args.client_id));
@@ -221,6 +231,8 @@ HRESULT PopulateAppSpecificData(const CommandLineAppArgs& app_args,
       return hr;
     }
   }
+
+  
 
   if (!app_args.install_data_index.IsEmpty()) {
     hr = app->put_serverInstallDataIndex(CComBSTR(app_args.install_data_index));
